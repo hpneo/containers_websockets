@@ -1,0 +1,32 @@
+.websockets-demo-container {
+  display: flex;
+  max-width: 90%;
+  min-height: 200px;
+  height: 90%;
+  background: rgb(48, 46, 47);
+  margin: 0 auto;
+  border-radius: 5px;
+  flex-flow: column;
+}
+
+.websockets-demo-container .websockets-demo-container-commands {
+  flex: 1;
+  font-family: 'Monaco', 'Menlo', 'Consolas';
+  font-size: 65%;
+  color: #ffffff;
+  padding: 5px 10px;
+  overflow: auto;
+}
+
+.websockets-demo-container input {
+  font-family: 'Monaco', 'Menlo', 'Consolas';
+  font-size: 65%;
+  background: none;
+  border: none;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
+.websockets-demo-container pre.cm-s-neo {
+  background: none;
+}

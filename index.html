@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Comunicación con Docker containers usando WebSockets</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/theme/neo.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Actor" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" media="screen">
+    <link rel="stylesheet" href="demo.css" media="screen">
+  </head>
+  <body>
+    <progress class="slide-progress" value="0" min="0" max="0">50%</progress>
+    <article class="slide slide-intro active">
+      <h1>Comunicación con Docker containers usando WebSockets</h1>
+      <h2>Creando una interfaz web con la Remote API de Docker y WebSockets.</h2>
+    </article>
+
+    <article class="slide slide-content">
+      <h1>¿Qué es Docker?</h1>
+      <aside class="slide-content-two-objects">
+        <ul>
+          <li>Es una plataforma que permite correr máquinas virtuales livianas (llamadas <em>containers</em>).</li>
+          <li>Podemos usarlo para levantar ambientes de desarrollo y pruebas; o escalar aplicaciones en producción.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <article class="slide slide-content">
+      <h1>Docker Remote API</h1>
+      <aside class="slide-content-two-objects">
+        <ul>
+          <li>Permite conectarse a los containers de Docker y hacer operaciones dentro de ellos utilizando una API REST.</li>
+          <li>También permite conectarnos a un proceso de un container de Docker utilizando WebSockets.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <article class="slide slide-content">
+      <h1>Docker Attach</h1>
+      <aside class="slide-content-one-object">
+        <p>
+          Para poder conectarnos a un container vía WebSockets necesitamos crearlo con ciertos parámetros:
+        </p>
+        <pre lang="shell">docker create --name websockets_demo --hostname hpneo --attach stdin --attach stdout --attach stderr --tty -i ubuntu sh</pre>
+      </aside>
+    </article>
+
+    <article class="slide slide-content">
+      <h1>Docker Attach</h1>
+      <aside class="slide-content-two-objects">
+        <p>
+          La API de Docker tiene un endpoint específico para la conexión vía WebSockets:
+        </p>
+        <pre lang="ruby">"ws://#{docker_host}:4000/v1.22/containers/#{container_name}/attach/ws?stderr=1&stdout=1&stream=1&stdin=0"</pre>
+      </aside>
+      <aside class="slide-content-two-objects">
+        Y toma los siguientes parámetros:
+        <ul>
+          <li><code>stream</code> – <code>true</code> o <code>false</code>. Devuelve el stream del proceso. Default <code>false</code>.</li>
+          <li><code>stdin</code> – <code>true</code> o <code>false</code>. Si <code>stream=true</code>, conecta el stream a stdin. Default <code>false</code>.</li>
+          <li><code>stdout</code> – <code>true</code> o <code>false</code>. Si <code>stream=true</code>, conecta el stream a stdout. Default <code>false</code>.</li>
+          <li><code>stderr</code> – <code>true</code> o <code>false</code>. Si <code>stream=true</code>, conecta el stream a stderr. Default <code>false</code>.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <article class="slide slide-content">
+      <h1>Demo</h1>
+      <aside class="slide-content-one-object">
+        <div class="websockets-demo-container">
+          <div class="websockets-demo-container-commands"></div>
+          <input type="text" name="input" value="" class="websockets-demo-input" placeholder="Type a command and press Enter">
+        </div>
+      </aside>
+    </article>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/runmode/runmode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/runmode/colorize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/mode/loadmode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/mode/overlay.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/shell/shell.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/ruby/ruby.min.js"></script>
+    <script src="index.js"></script>
+    <script src="websockets_demo.js"></script>
+    <script type="text/javascript">
+      startSlides();
+    </script>
+  </body>
+</html>
