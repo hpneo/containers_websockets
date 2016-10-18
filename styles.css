@@ -167,3 +167,13 @@ pre.cm-s-neo {
 .cm-s-neo .cm-attribute {
   color: #1d75b3;
 }
+
+@media (max-width: 800px) {
+  .slide {
+    overflow: auto;
+  }
+
+  .slide-content .slide-content-two-objects {
+    flex: 1 100%;
+  }
+}
