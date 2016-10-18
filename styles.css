@@ -105,6 +105,39 @@ pre.cm-s-neo {
   max-width: 100%;
 }
 
+.slide-intro {
+  color: #ecf0f1;
+  text-shadow: 0 0 60px #000;
+}
+
+.slide-intro:after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('images/6027229355_515cbede44_o.jpg') no-repeat center center;
+  background-size: 100% auto;
+}
+
+.slide-intro:before {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1;
+}
+
+.slide-intro > * {
+  z-index: 1;
+}
+
 .slide-intro h2 {
   align-self: flex-start;
 }
@@ -120,6 +153,11 @@ pre.cm-s-neo {
 
 .slide-content .slide-content-two-objects {
   flex: 0.5 0%;
+}
+
+.slide-content .slide-content-two-objects img {
+  display: block;
+  margin: 0 auto;
 }
 
 .cm-s-neo .cm-builtin {

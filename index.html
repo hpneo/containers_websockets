@@ -25,6 +25,9 @@
           <li>Podemos usarlo para levantar ambientes de desarrollo y pruebas; o escalar aplicaciones en producción.</li>
         </ul>
       </aside>
+      <aside class="slide-content-two-objects">
+        <img src="images/docker.png" alt="Docker" />
+      </aside>
     </article>
 
     <article class="slide slide-content">
@@ -32,28 +35,39 @@
       <aside class="slide-content-two-objects">
         <ul>
           <li>Permite conectarse a los containers de Docker y hacer operaciones dentro de ellos utilizando una API REST.</li>
-          <li>También permite conectarnos a un proceso de un container de Docker utilizando WebSockets.</li>
+          <li>También permite conectarnos a un proceso dentro de un container de Docker utilizando WebSockets.</li>
+        </ul>
+      </aside>
+      <aside class="slide-content-two-objects">
+        <img src="images/docker.png" alt="Docker" />
+      </aside>
+    </article>
+
+    <article class="slide slide-content">
+      <h1>Preparando un container</h1>
+      <aside class="slide-content-two-objects">
+        <p>
+          Para poder conectarnos a un container vía WebSockets necesitamos crearlo con ciertos parámetros:
+        </p>
+        <pre lang="shell">docker create --name websockets_demo --attach stdin --attach stdout --attach stderr --tty --interactive ubuntu sh</pre>
+      </aside>
+      <aside class="slide-content-two-objects">
+        <ul>
+          <li><code>--name</code>. El nombre del container a crear.</li>
+          <li><code>--attach</code>. Permite conectar los streams STDIN, STDOUT y/o STDERR.</li>
+          <li><code>--tty</code>. Permite asignar un pseudo-TTY al container.</li>
+          <li><code>--interactive</code>. Mantiene STDIN abierto aún si no ha sido conectado.</li>
         </ul>
       </aside>
     </article>
 
     <article class="slide slide-content">
-      <h1>Docker Attach</h1>
-      <aside class="slide-content-one-object">
-        <p>
-          Para poder conectarnos a un container vía WebSockets necesitamos crearlo con ciertos parámetros:
-        </p>
-        <pre lang="shell">docker create --name websockets_demo --hostname hpneo --attach stdin --attach stdout --attach stderr --tty -i ubuntu sh</pre>
-      </aside>
-    </article>
-
-    <article class="slide slide-content">
-      <h1>Docker Attach</h1>
+      <h1>Docker Attach (WebSockets)</h1>
       <aside class="slide-content-two-objects">
         <p>
           La API de Docker tiene un endpoint específico para la conexión vía WebSockets:
         </p>
-        <pre lang="ruby">"ws://#{docker_host}:4000/v1.22/containers/#{container_name}/attach/ws?stderr=1&stdout=1&stream=1&stdin=0"</pre>
+        <pre lang="ruby">"ws://127.0.0.1:2376/v1.22/containers/#{container_name}/attach/ws?stderr=1&stdout=1&stream=1&stdin=0"</pre>
       </aside>
       <aside class="slide-content-two-objects">
         Y toma los siguientes parámetros:
@@ -62,6 +76,31 @@
           <li><code>stdin</code> – <code>true</code> o <code>false</code>. Si <code>stream=true</code>, conecta el stream a stdin. Default <code>false</code>.</li>
           <li><code>stdout</code> – <code>true</code> o <code>false</code>. Si <code>stream=true</code>, conecta el stream a stdout. Default <code>false</code>.</li>
           <li><code>stderr</code> – <code>true</code> o <code>false</code>. Si <code>stream=true</code>, conecta el stream a stderr. Default <code>false</code>.</li>
+        </ul>
+      </aside>
+    </article>
+
+    <article class="slide slide-content">
+      <h1>Conectándose desde el navegador</h1>
+      <aside class="slide-content-two-objects">
+        <p>
+          Para poder conectarnos a un container vía WebSockets utilizamos la dirección:
+        </p>
+        <pre lang="javascript">var url = 'ws://127.0.0.1:2376/v1.22/containers/' + containerName + '/attach/ws',
+
+var connection = new WebSocket(url + '?logs=0&stream=1&stdin=1&stdout=1&stderr=1');
+
+connection.addEventListener('open', function() {
+  console.log('open');
+  connection.send('ls\n');
+});</pre>
+      </aside>
+      <aside class="slide-content-two-objects">
+        <ul>
+          <li><code>--name</code>. El nombre del container a crear.</li>
+          <li><code>--attach</code>. Permite conectar los streams STDIN, STDOUT y/o STDERR.</li>
+          <li><code>--tty</code>. Permite asignar un pseudo-TTY al container.</li>
+          <li><code>--interactive</code>. Mantiene STDIN abierto aún si no ha sido conectado.</li>
         </ul>
       </aside>
     </article>
@@ -84,6 +123,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/mode/overlay.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/shell/shell.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/ruby/ruby.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/javascript/javascript.min.js"></script>
     <script src="index.js"></script>
     <script src="websockets_demo.js"></script>
     <script type="text/javascript">
