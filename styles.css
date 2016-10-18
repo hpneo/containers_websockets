@@ -119,7 +119,7 @@ pre.cm-s-neo {
   right: 0;
   bottom: 0;
   background: url('images/6027229355_515cbede44_o.jpg') no-repeat center center;
-  background-size: 100% auto;
+  background-size: cover;
 }
 
 .slide-intro:before {

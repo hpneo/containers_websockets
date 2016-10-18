@@ -3,6 +3,7 @@
   max-width: 90%;
   min-height: 200px;
   height: 90%;
+  max-height: 500px;
   background: rgb(48, 46, 47);
   margin: 0 auto;
   border-radius: 5px;

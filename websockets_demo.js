@@ -4,7 +4,9 @@ var commands = document.querySelector('.websockets-demo-container-commands'),
 
 input.addEventListener('keyup', function(event) {
   if (event.keyCode === 13) {
-    connection.send(event.target.value + '\n');
+    if (event.target.value.trim() !== '') {
+      connection.send(event.target.value + '\n');
+    }
   }
 });
 
