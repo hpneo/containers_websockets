@@ -10,7 +10,7 @@ input.addEventListener('keyup', function(event) {
   }
 });
 
-var connection = new WebSocket('ws://54.88.32.109:4000/v1.22/containers/websockets_demo/attach/ws?logs=0&stream=1&stdin=1&stdout=1&stderr=1');
+var connection = new WebSocket('wss://ws.codeground.xyz:4430/v1.22/containers/websockets_demo/attach/ws?logs=0&stream=1&stdin=1&stdout=1&stderr=1');
 
 connection.addEventListener('open', function() {
   console.log('open');
