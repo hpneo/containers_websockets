@@ -31,6 +31,19 @@ pre.cm-s-neo {
   border-radius: 5px;
 }
 
+a {
+  color: #3498db;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.inline-icon {
+  display: inline !important;
+  vertical-align: middle;
+}
+
 .slide-progress {
   display: block;
   position: absolute;
