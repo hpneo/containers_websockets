@@ -10,7 +10,7 @@ function buildSnippet(snippet) {
 
 function buildEvents() {
   window.addEventListener('keyup', function(event) {
-    if (event.target.tagName === 'INPUT') {
+    if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
       return;
     }
 
@@ -52,6 +52,17 @@ function goToSlide(index) {
 
   if (!slides[index].dataset.rendered) {
     Array.prototype.forEach.call(slides[index].querySelectorAll('pre[lang]'), buildSnippet);
+  }
+
+  if (index === slides.length - 1 && document.querySelector('#codebite-demo')) {
+    var bite = new CodeBite({
+      type: 'devpad-nodejs',
+      element: document.querySelector('#codebite-demo')
+    });
+
+    setTimeout(function() {
+      bite.editor.refresh();
+    }, 0);
   }
 
   slides[index].classList.add('active');

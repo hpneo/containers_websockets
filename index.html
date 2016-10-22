@@ -8,6 +8,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/theme/neo.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Actor" rel="stylesheet">
     <link rel="stylesheet" href="styles.css" media="screen">
+    <link rel="stylesheet" href="codebite.css" media="screen">
     <link rel="stylesheet" href="demo.css" media="screen">
   </head>
   <body>
@@ -106,7 +107,7 @@ connection.addEventListener('open', function() {
     </article>
 
     <article class="slide slide-content">
-      <h1>Demo</h1>
+      <h1>Demo #1</h1>
       <aside class="slide-content-one-object">
         <div class="websockets-demo-container">
           <div class="websockets-demo-container-commands"></div>
@@ -115,7 +116,13 @@ connection.addEventListener('open', function() {
       </aside>
     </article>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.min.js"></script>
+    <article class="slide slide-content">
+      <h1>Demo #2</h1>
+      <aside class="slide-content-one-object">
+        <pre id="codebite-demo" data-rendered="true">process.env</pre>
+      </aside>
+    </article>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/runmode/runmode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/addon/runmode/colorize.min.js"></script>
@@ -124,9 +131,20 @@ connection.addEventListener('open', function() {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/shell/shell.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/ruby/ruby.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.18.2/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/mode/clike/clike.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/mode/php/php.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.15.2/mode/go/go.min.js"></script>
     <script src="index.js"></script>
+    <script src="codebite.js"></script>
     <script src="websockets_demo.js"></script>
     <script type="text/javascript">
+      CodeBite.baseURL = 'test.devpad.io/repl';
+      CodePicnic.API_HOST = 'https://codeground.xyz/api';
+      CodePicnic.OAUTH_HOST = 'https://codeground.xyz';
+      CodeBite.authToken = '123456abcdef';
+      CodeBite.clientKey = 'a25706047f997ade91fae8c31ec69240b47f64a43a3ac1454bce873337765754';
+      CodeBite.clientSecret = '8fd1fa63cafe6f33ffa24e25eabceb43f35cb86ebc7b3dee317f54fc71dfbfc3';
+
       startSlides();
     </script>
   </body>
